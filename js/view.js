@@ -34,10 +34,25 @@ view.loadBlogPosts = function() {
 };
 
 /**
+ * Loads a single blog post
+ *
+ * @param slug {string} Post to create markup for
+ */
+
+view.loadBlogPost = function( slug ) {
+  var post = model.getPost( slug );
+      titleEl = helpers.getPageTitleEl();
+      contentEl = helpers.getPageContentEl();
+
+  titleEl.innerHTML = post.title;
+  contentEl.innerHTML = post.content;
+};
+
+/**
  * Creates markup for blog posts
  *
- * @param object {post} Post to create markup for
- * @return object {articleEl} Final post markup
+ * @param post {object} Post to create markup for
+ * @return articleEl {object} Final post markup
  */
 
 view.createPostMarkup = function( post ) {

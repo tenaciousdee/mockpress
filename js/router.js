@@ -55,6 +55,6 @@ router.loadContent = function() {
   if ( null === slug ) {
     view.loadBlogPosts();
   } else {
-    console.log( 'Load post ' + slug );
+    view.loadBlogPost( slug );
   }
 }

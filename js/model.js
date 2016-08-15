@@ -25,6 +25,25 @@ model.getPosts = function() {
 };
 
 /**
+ * Gets a single post based on url slug
+ *
+ * @param slug {string} The slug for the post
+ * @return post {object} Single post
+ */
+
+ model.getPost = function( slug ) {
+   var posts = model.getLocalStore();
+
+   for ( var i = 0, max = posts.length; i < max; i++ ) {
+     if ( slug === posts[i].slug ) {
+       return posts[i];
+     }
+   }
+
+   return null;
+ };
+
+/**
  * Gets content from local store
  *
  * @return store {object} object or array of objects of site data

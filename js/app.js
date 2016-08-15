@@ -16,7 +16,6 @@ var mockPress = {
     // to run to start the application
     model.init();
     router.init();
-    view.init();
   }
 
 };
