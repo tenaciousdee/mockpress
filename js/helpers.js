@@ -61,3 +61,21 @@ helpers.getPageTitleEl = function() {
 helpers.getPageContentEl = function() {
   return document.getElementById( 'pageContent' );
 };
+
+/**
+ * Gets the Editor element in the DOM
+ * @return {Object} Main editor DOM object
+ */
+
+helpers.getEditorEl = function() {
+  return document.getElementById( 'editor' );
+}
+
+/**
+ * Gets Editor toggle element in the DOM
+ * @return {Object} Main toggle element
+ */
+
+ helpers.getEditorToggleEl = function() {
+   return document.getElementById( 'editorToggle' );
+ }
