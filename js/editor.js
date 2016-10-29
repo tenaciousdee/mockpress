@@ -22,12 +22,27 @@ editor.init = function() {
  * @param {Object} contentObj Post or page object to load
  */
 
-editor.loadEditForm = function( contentObj ) {
+editor.fillEditForm = function( contentObj ) {
   var titleForm = helpers.getEditorTitleEl(),
       contentForm = helpers.getEditorContentEl();
 
   titleForm.value = contentObj.title;
   contentForm.value = contentObj.content;
+
+  editor.addFormListeners();
+};
+
+
+/**
+ * Adds event listeners to form elements
+ */
+
+editor.addFormListeners = function() {
+  var titleForm = helpers.getEditorTitleEl(),
+      contentForm = helpers.getEditorContentEl();
+
+  titleForm.addEventListener('input', view.updateTitleFromForm, false);
+  contentForm.addEventListener('input', view.updateContentFromForm, false);
 };
 
 /**
@@ -55,6 +70,6 @@ editor.toggle = function() {
   event.preventDefault();
 
   if( false === toggleEl.classList.contains( 'hidden' ) ) {
-    editor.loadEditForm( model.getCurrentContent() );
+    editor.fillEditForm( model.getCurrentContent() );
   }
 };
