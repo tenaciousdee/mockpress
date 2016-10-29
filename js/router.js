@@ -53,8 +53,10 @@ router.loadContent = function() {
   view.clearContent();
 
   if ( null === slug ) {
+    view.loadSingleContent( 'home' );
+  } else if( 'blog' === slug ) {
     view.loadBlogPosts();
   } else {
-    view.loadBlogPost( slug );
+    view.loadSingleContent( slug );
   }
 }
