@@ -76,6 +76,24 @@ helpers.getEditorEl = function() {
  * @return {Object} Main toggle element
  */
 
- helpers.getEditorToggleEl = function() {
-   return document.getElementById( 'editorToggle' );
- }
+helpers.getEditorToggleEl = function() {
+ return document.getElementById( 'editorToggle' );
+}
+
+/**
+ * Gets Editor title field element
+ * @return {Object} Title field
+ */
+
+helpers.getEditorTitleEl = function() {
+ return document.getElementById( 'editTitle' );
+}
+
+/**
+ * Gets Editor content field element
+ * @return {Object} Content field
+ */
+
+helpers.getEditorContentEl = function() {
+ return document.getElementById( 'editContent' );
+}

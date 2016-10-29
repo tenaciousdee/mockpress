@@ -13,6 +13,49 @@ model.init = function() {
 };
 
 /**
+ * Gets a single post or page based on the url slug
+ *
+ * @param {String} slug The slug for the post
+ * @return {Object} contentObj Single post or page
+ *
+ */
+
+model.getContent = function( slug ) {
+  var contentObj = model.getPost( slug );
+
+  if ( null === contentObj ) {
+    contentObj = model.getPage( slug );
+  }
+
+  if( null === contentObj ) {
+    contentObj = {
+      title: '404 Error',
+      content: 'Content not found'
+    }
+  }
+
+  return contentObj;
+};
+
+/**
+ * Gets a single post or page based on the current url
+ *
+ * @return {Object} contentObj Single post or page
+ *
+ */
+
+model.getCurrentContent = function() {
+  var slug = router.getSlug(),
+      contentObj;
+
+  if( null === slug ) slug = 'home';
+
+  contentObj = model.getContent( slug );
+
+  return contentObj;
+};
+
+/**
  * Gets posts from local store
  *
  * @return posts {array} an array of post objects

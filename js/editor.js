@@ -18,6 +18,19 @@ editor.init = function() {
 }
 
 /**
+ * Dynamically fills the edit form based on the url
+ * @param {Object} contentObj Post or page object to load
+ */
+
+editor.loadEditForm = function( contentObj ) {
+  var titleForm = helpers.getEditorTitleEl(),
+      contentForm = helpers.getEditorContentEl();
+
+  titleForm.value = contentObj.title;
+  contentForm.value = contentObj.content;
+};
+
+/**
  * Listens for the editor toggle button
  */
 
@@ -40,4 +53,8 @@ editor.toggle = function() {
   toggleEl.classList.toggle( 'hidden' );
 
   event.preventDefault();
+
+  if( false === toggleEl.classList.contains( 'hidden' ) ) {
+    editor.loadEditForm( model.getCurrentContent() );
+  }
 };
