@@ -9,8 +9,7 @@
 var model = {};
 
 model.init = function() {
-  model.updateLocalStore( jsonData );
-  console.log( model.getPosts() );
+  model.updateLocalStore( data );
 };
 
 /**
@@ -20,7 +19,7 @@ model.init = function() {
  */
 
 model.getPosts = function() {
-  var posts = model.getLocalStore();
+  var posts = model.getLocalStore().posts;
   return posts;
 };
 
@@ -32,11 +31,41 @@ model.getPosts = function() {
  */
 
  model.getPost = function( slug ) {
-   var posts = model.getLocalStore();
+   var posts = model.getLocalStore().posts;
 
    for ( var i = 0, max = posts.length; i < max; i++ ) {
      if ( slug === posts[i].slug ) {
        return posts[i];
+     }
+   }
+
+   return null;
+ };
+
+/**
+ * Gets pages from local store
+ *
+ * @return {object[]} pages array of page objects
+ */
+
+model.getPages = function() {
+  var pages = model.getLocalStore().pages;
+  return pages;
+}
+
+/**
+ * Gets a single page based on url slug
+ *
+ * @param {string} slug The slug for the page
+ * @return {object} page Single page object
+ */
+
+ model.getPage = function( slug ) {
+   var pages = model.getLocalStore().pages;
+
+   for ( var i = 0, max = pages.length; i < max; i++ ) {
+     if ( slug === pages[i].slug ) {
+       return pages[i];
      }
    }
 
@@ -60,7 +89,7 @@ model.getPosts = function() {
  */
 
 model.updateLocalStore = function( store ) {
-  localStorage.setItem( 'mockPress', store );
+  localStorage.setItem( 'mockPress', JSON.stringify( store ) );
 };
 
 /**
