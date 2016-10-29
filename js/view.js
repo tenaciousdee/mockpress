@@ -14,6 +14,7 @@ var view = {};
  */
 
 view.init = function() {
+  view.createMainMenu();
 };
 
 /**
@@ -40,12 +41,29 @@ view.loadBlogPosts = function() {
  */
 
 view.loadBlogPost = function( slug ) {
-  var post = model.getPost( slug );
-      titleEl = helpers.getPageTitleEl();
+  var post = model.getPost( slug ),
+      titleEl = helpers.getPageTitleEl(),
       contentEl = helpers.getPageContentEl();
 
   titleEl.innerHTML = post.title;
   contentEl.innerHTML = post.content;
+};
+
+/**
+ * Creates Main Menu Links for Pages
+ *
+ */
+
+view.createMainMenu = function() {
+  var pages = model.getPages(),
+      menuMarkup = document.createDocumentFragment(),
+      mainMenuEl = helpers.getMainMenuEl();
+
+  for (var i = 0, max = pages.length; i < max; i++) {
+    menuMarkup.append( helpers.createMenuItem( pages[i] ) );
+  }
+
+  mainMenuEl.appendChild( menuMarkup );
 };
 
 /**
