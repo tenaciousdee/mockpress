@@ -97,3 +97,12 @@ helpers.getEditorTitleEl = function() {
 helpers.getEditorContentEl = function() {
  return document.getElementById( 'editContent' );
 }
+
+/**
+ * Gets editor form update button
+ * @return {Object} Content Form Element
+ */
+
+ helpers.getEditorUpdateBtn = function() {
+  return document.getElementById( 'editUpdateBtn' );
+ }

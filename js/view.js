@@ -102,6 +102,7 @@ view.updateTitleFromForm = function() {
       title = helpers.getEditorTitleEl().value;
 
   titleEl.innerHTML = title;
+  editor.currentContent.title = title;
 };
 
 /**
@@ -114,6 +115,7 @@ view.updateContentFromForm = function() {
       content = helpers.getEditorContentEl().value;
 
   contentEl.innerHTML = content;
+  editor.currentContent.content = content;
 }
 
 /**

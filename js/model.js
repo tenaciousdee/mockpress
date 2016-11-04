@@ -116,6 +116,39 @@ model.getPages = function() {
  };
 
 /**
+ * Updates post or page in local store
+ *
+ * @param {Object} contentObj content object to update
+ */
+
+model.updateContent = function( contentObj ) {
+  var store = model.getLocalStore(),
+      date = new Date();
+
+  if( 'post' === contentObj.type ) {
+    store.posts.forEach( function( post ) {
+      if( contentObj.id === post.id ) {
+        post.title = contentObj.title;
+        post.content = contentObj.content;
+        post.modified = date.toISOString();
+      }
+    });
+  }
+
+  if( 'page' === contentObj.type ) {
+    store.pages.forEach( function( page ) {
+      if( contentObj.id === page.id ) {
+        page.title = contentObj.title;
+        page.content = contentObj.content;
+        page.modified = date.toISOString();
+      }
+    });
+  }
+
+  model.updateLocalStore( store );
+}
+
+/**
  * Gets content from local store
  *
  * @return store {object} object or array of objects of site data
