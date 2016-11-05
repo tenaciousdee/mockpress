@@ -9,6 +9,7 @@
 var editor = {};
 
 editor.currentContent = '';
+editor.unSavedContent = false;
 
 /**
  * Initializes the Mockpress app
@@ -24,9 +25,35 @@ editor.init = function() {
  *
  */
 
-editor.updateContent = function() {
+editor.saveContent = function() {
   model.updateContent( editor.currentContent );
 };
+
+/**
+ * Update the title when changed in editor
+ *
+ */
+
+editor.updateTitle = function() {
+  var title = helpers.getEditorTitleEl().value;
+
+  editor.currentContent.title = title;
+  editor.unSavedContent = true;
+  view.updateTitle( title );
+}
+
+/**
+* Update the content when changed in editor
+*
+*/
+
+editor.updateContent = function() {
+  var content = helpers.getEditorContentEl().value;
+
+  editor.currentContent.content = content;
+  editor.unSavedContent = true;
+  view.updateContent( content );
+}
 
 /**
  * Dynamically fills the edit form based on the url
@@ -55,12 +82,34 @@ editor.fillEditForm = function( contentObj ) {
 
 editor.addFormListeners = function() {
   var titleForm = helpers.getEditorTitleEl(),
-      contentForm = helpers.getEditorContentEl();
-      updateBtn = helpers.getEditorUpdateBtn();
+      contentForm = helpers.getEditorContentEl(),
+      updateBtn = helpers.getEditorUpdateBtn(),
+      links = helpers.getLinks();
 
-  titleForm.addEventListener('input', view.updateTitleFromForm, false);
-  contentForm.addEventListener('input', view.updateContentFromForm, false);
-  updateBtn.addEventListener('click', editor.updateContent, false);
+  titleForm.addEventListener('input', editor.updateTitle, false);
+  contentForm.addEventListener('input', editor.updateContent, false);
+  updateBtn.addEventListener('click', editor.saveContent, false);
+
+  links.forEach( function( link ) {
+    link.addEventListener('click', editor.protectUnsavedContent, false);
+  });
+};
+
+/**
+ * Adds alert if links are clicked with unsaved content
+ *
+ */
+
+editor.protectUnsavedContent = function() {
+  if( true === editor.unSavedContent ) {
+    var confirm = window.confirm( 'You have unsaved content' );
+
+    if( false === confirm ) {
+      event.preventDefault();
+    } else {
+      editor.unSavedContent = false;
+    }
+  }
 };
 
 /**

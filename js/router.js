@@ -49,7 +49,9 @@ router.listenPageChange = function() {
  */
 
 router.loadContent = function() {
-  var slug = router.getSlug();
+  var slug = router.getSlug(),
+      toggleEl = helpers.getEditorToggleEl();
+
   view.clearContent();
 
   if ( null === slug ) {
@@ -58,5 +60,11 @@ router.loadContent = function() {
     view.loadBlogPosts();
   } else {
     view.loadSingleContent( slug );
+  }
+
+  editor.currentContent = model.getContent( slug );
+
+  if( false === toggleEl.classList.contains( 'hidden' ) ) {
+    editor.fillEditForm( editor.currentContent );
   }
 }

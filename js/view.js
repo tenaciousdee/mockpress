@@ -97,12 +97,10 @@ view.createPostMarkup = function( post ) {
  *
  */
 
-view.updateTitleFromForm = function() {
-  var titleEl = helpers.getPageTitleEl(),
-      title = helpers.getEditorTitleEl().value;
+view.updateTitle = function( title ) {
+  var titleEl = helpers.getPageTitleEl();
 
   titleEl.innerHTML = title;
-  editor.currentContent.title = title;
 };
 
 /**
@@ -110,12 +108,10 @@ view.updateTitleFromForm = function() {
  *
  */
 
-view.updateContentFromForm = function() {
-  var contentEl = helpers.getPageContentEl(),
-      content = helpers.getEditorContentEl().value;
+view.updateContent = function( content ) {
+  var contentEl = helpers.getPageContentEl();
 
   contentEl.innerHTML = content;
-  editor.currentContent.content = content;
 }
 
 /**

@@ -41,6 +41,15 @@ helpers.createLink = function( contentObj ) {
 };
 
 /**
+ * Gets all Links
+ * @return {Object[]} All link elements
+ */
+
+helpers.getLinks = function() {
+  return document.querySelectorAll( 'a' );
+};
+
+/**
  * Gets the main menu element
  * @return {Object} Main menu DOM element
  */
