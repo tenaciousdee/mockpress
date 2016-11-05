@@ -26,7 +26,10 @@ editor.init = function() {
  */
 
 editor.saveContent = function() {
+  event.preventDefault();
   model.updateContent( editor.currentContent );
+  editor.unSavedContent = false;
+  editor.animateSaveBtn();
 };
 
 /**
@@ -73,6 +76,28 @@ editor.fillEditForm = function( contentObj ) {
   contentForm.value = contentObj.content;
 
   editor.addFormListeners();
+};
+
+/**
+ * Animates the Update button to mimic saving data
+ *
+ */
+
+editor.animateSaveBtn = function() {
+  var btn = helpers.getEditorUpdateBtn(),
+      saved = function() {
+        setTimeout( function() {
+          btn.innerText = 'Update';
+        }, 1000 );
+      }
+      saving = function() {
+        setTimeout( function() {
+          btn.innerText = 'Saved!';
+          saved();
+        }, 900 );
+      };
+  btn.innerText = 'Saving...';
+  saving();
 };
 
 
